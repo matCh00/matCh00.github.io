@@ -1,1 +1,202 @@
-<!doctype html><html lang="en"><head><base href="/"/><meta charset="UTF-8"/><title>Mateusz Chalik's portfolio</title><link rel="shortcut icon" href="icon.png" type="image/png/ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><script defer="defer" src="/Portfolio/v4/static/js/main.31884c93.js"></script><link href="/Portfolio/v4/static/css/main.36fc20b4.css" rel="stylesheet"></head><body><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Portfolio Projekty | matCh00</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --header-height: 38px;
+        --transition-speed: 0.3s;
+        --header-bg: #333333;
+        --header-text: #eeeeee;
+        --link-color: #dddddd;
+        --link-hover-bg: #555555;
+        --link-active-bg: #777777;
+        --overlay-bg: rgba(0, 0, 0, 0.6);
+        --safe-top: env(safe-area-inset-top);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f0f0;
+        color: #222222;
+        padding-top: calc(var(--header-height) + var(--safe-top));
+      }
+      header {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: var(--header-height);
+        padding-top: var(--safe-top);
+        background: var(--header-bg);
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+      }
+      .logo h1 {
+        font-size: 1.25rem;
+        color: var(--header-text);
+        font-weight: 500;
+      }
+      #menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--header-text);
+        z-index: 2001;
+      }
+      nav { display: flex; }
+      nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+      nav ul li { margin-left: 1rem; }
+      nav ul li a {
+        text-decoration: none;
+        color: var(--link-color);
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        transition: all var(--transition-speed), color var(--transition-speed);
+      }
+      nav ul li a:hover {
+        background: var(--link-hover-bg);
+        color: var(--header-text);
+      }
+      nav ul li a.active {
+        background: var(--link-active-bg);
+        color: var(--header-text);
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: calc(var(--header-height) + var(--safe-top));
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--header-height) - var(--safe-top));
+        background: var(--overlay-bg);
+        z-index: 1500;
+        opacity: 0;
+        transition: opacity var(--transition-speed);
+      }
+      .overlay.open {
+        display: block;
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        #menu-toggle { display: block; }
+        nav {
+          display: none;
+          position: fixed;
+          top: calc(var(--header-height) + var(--safe-top));
+          right: 0;
+          background-color: #444444;
+          width: 100%;
+          height: calc(100vh - var(--header-height) - var(--safe-top));
+          flex-direction: column;
+          align-items: center;
+          padding-top: 1rem;
+          z-index: 1600;
+        }
+        nav.open { display: flex; }
+        nav ul {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+        nav ul li { margin: 0 0 1.5rem 0; }
+        nav ul li a {
+          font-size: 1.2rem;
+          padding: 0.8rem 1.5rem;
+          color: var(--header-text);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+          background: var(--link-hover-bg);
+          color: var(--header-text);
+        }
+      }
+      iframe {
+        position: absolute;
+        top: calc(var(--header-height) + var(--safe-top));
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--header-height) - var(--safe-top));
+        border: none;
+        background-color: white;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo"><h1>🚀 matCh00</h1></div>
+      <button id="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="#" data-version="v1">v1</a></li>
+          <li><a href="#" data-version="v2">v2</a></li>
+          <li><a href="#" data-version="v3">v3</a></li>
+          <li><a href="#" data-version="v4">v4</a></li>
+          <li><a href="#" data-version="v5" class="active">v5</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="overlay" class="overlay"></div>
+
+    <iframe
+      id="portfolio-frame"
+      src="https://match00.github.io/Portfolio_public/v5/"
+      title="Portfolio"
+    ></iframe>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
+        const links = navMenu.querySelectorAll("a[data-version]");
+        const iframe = document.getElementById("portfolio-frame");
+        const overlay = document.getElementById("overlay");
+        const baseUrl = "https://match00.github.io/Portfolio_public";
+
+        // Ustawienie aktywnego linku domyślnie
+        links.forEach((link) => {
+          if (link.dataset.version === "v5") {
+            link.classList.add("active");
+          }
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const version = this.dataset.version;
+            // Poprawne przypisanie src iframe
+            iframe.src = `${baseUrl}/${version}/`;
+            links.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+            closeMenu();
+          });
+        });
+        menuToggle.addEventListener("click", function () {
+          if (navMenu.classList.contains("open")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        overlay.addEventListener("click", closeMenu);
+        function openMenu() {
+          navMenu.classList.add("open");
+          overlay.classList.add("open");
+        }
+        function closeMenu() {
+          navMenu.classList.remove("open");
+          overlay.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
+</html>
