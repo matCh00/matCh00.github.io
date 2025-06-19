@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Portfolio Projekty | matCh00</title>
+    <title>Portfolio | matCh00</title>
+    <link rel="shortcut icon" href="icon.png" type="image/png/ico" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <style>
       :root {
         --header-height: 38px;
@@ -17,13 +19,21 @@
         --overlay-bg: rgba(0, 0, 0, 0.6);
         --safe-top: env(safe-area-inset-top);
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: 
+        border-box;
+      }
+
       body {
         font-family: "Inter", sans-serif;
         background-color: #f0f0f0;
         color: #222222;
         padding-top: calc(var(--header-height) + var(--safe-top));
       }
+
       header {
         position: fixed;
         top: 0; left: 0; width: 100%; height: var(--header-height);
@@ -34,11 +44,13 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         z-index: 2000;
       }
+
       .logo h1 {
         font-size: 1.25rem;
         color: var(--header-text);
         font-weight: 500;
       }
+
       #menu-toggle {
         display: none;
         background: none;
@@ -48,13 +60,21 @@
         color: var(--header-text);
         z-index: 2001;
       }
-      nav { display: flex; }
+
+      nav { 
+        display: flex; 
+      }
+
       nav ul {
         list-style: none;
         display: flex;
         align-items: center;
       }
-      nav ul li { margin-left: 1rem; }
+
+      nav ul li { 
+        margin-left: 1rem;
+      }
+
       nav ul li a {
         text-decoration: none;
         color: var(--link-color);
@@ -64,14 +84,17 @@
         border-radius: 999px;
         transition: all var(--transition-speed), color var(--transition-speed);
       }
+
       nav ul li a:hover {
         background: var(--link-hover-bg);
         color: var(--header-text);
       }
+
       nav ul li a.active {
         background: var(--link-active-bg);
         color: var(--header-text);
       }
+
       .overlay {
         display: none;
         position: fixed;
@@ -84,12 +107,17 @@
         opacity: 0;
         transition: opacity var(--transition-speed);
       }
+
       .overlay.open {
         display: block;
         opacity: 1;
       }
+
       @media (max-width: 768px) {
-        #menu-toggle { display: block; }
+        #menu-toggle { 
+          display: block; 
+        }
+
         nav {
           display: none;
           position: fixed;
@@ -103,24 +131,34 @@
           padding-top: 1rem;
           z-index: 1600;
         }
-        nav.open { display: flex; }
+
+        nav.open { 
+          display: flex; 
+        }
+
         nav ul {
           flex-direction: column;
           align-items: center;
           width: 100%;
         }
-        nav ul li { margin: 0 0 1.5rem 0; }
+
+        nav ul li { 
+          margin: 0 0 1.5rem 0;
+        }
+
         nav ul li a {
           font-size: 1.2rem;
           padding: 0.8rem 1.5rem;
           color: var(--header-text);
         }
+
         nav ul li a:hover,
         nav ul li a.active {
           background: var(--link-hover-bg);
           color: var(--header-text);
         }
       }
+
       iframe {
         position: absolute;
         top: calc(var(--header-height) + var(--safe-top));
@@ -133,10 +171,13 @@
       }
     </style>
   </head>
+
   <body>
     <header>
       <div class="logo"><h1>🚀 matCh00</h1></div>
+
       <button id="menu-toggle" aria-label="Toggle menu">☰</button>
+
       <nav id="nav-menu">
         <ul>
           <li><a href="#" data-version="v1">v1</a></li>
@@ -165,11 +206,11 @@
         const overlay = document.getElementById("overlay");
         const baseUrl = "https://match00.github.io/Portfolio_public";
 
-        // Ustawienie aktywnego linku domyślnie
         links.forEach((link) => {
           if (link.dataset.version === "v5") {
             link.classList.add("active");
           }
+
           link.addEventListener("click", function (e) {
             e.preventDefault();
             const version = this.dataset.version;
@@ -179,6 +220,7 @@
             closeMenu();
           });
         });
+
         menuToggle.addEventListener("click", function () {
           if (navMenu.classList.contains("open")) {
             closeMenu();
@@ -186,11 +228,14 @@
             openMenu();
           }
         });
+
         overlay.addEventListener("click", closeMenu);
+
         function openMenu() {
           navMenu.classList.add("open");
           overlay.classList.add("open");
         }
+
         function closeMenu() {
           navMenu.classList.remove("open");
           overlay.classList.remove("open");
