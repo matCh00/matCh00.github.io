@@ -173,7 +173,6 @@
           link.addEventListener("click", function (e) {
             e.preventDefault();
             const version = this.dataset.version;
-            // Poprawne przypisanie src iframe
             iframe.src = `${baseUrl}/${version}/`;
             links.forEach((l) => l.classList.remove("active"));
             this.classList.add("active");
